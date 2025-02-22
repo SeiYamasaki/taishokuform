@@ -56,6 +56,18 @@
                 .section-file {
                     color: purple;
                 }
+
+                /* カメラプレビュー用 */
+                .camera-container {
+                    display: none;
+                    margin-top: 10px;
+                    text-align: center;
+                }
+
+                video {
+                    width: 100%;
+                    max-width: 400px;
+                }
             </style>
 
             <h4 class="section-personal">個人情報</h4>
@@ -121,15 +133,99 @@
             </div>
 
             <h4 class="section-file">ファイルアップロード</h4>
+            <!-- 雇用契約書（通常アップロード + カメラ撮影） -->
             <div class="mb-3">
-                <label for="employment_contract" class="form-label">あなたの雇用契約書または労働条件通知書</label>
+                <label for="employment_contract" class="form-label">あなたの雇用契約書または労働条件通知書（撮影可）</label>
                 <input type="file" class="form-control file-input" id="employment_contract" name="employment_contract"
-                    required>
+                    accept=".pdf,.doc,.docx,image/*" required onchange="previewImage(event, 'preview_employment_contract')">
+
+                <button type="button" class="btn btn-secondary mt-2" onclick="startCamera('employment_contract')">📷
+                    カメラを起動</button>
+
+                <div class="camera-container" id="cameraContainer">
+                    <video id="cameraView" autoplay playsinline></video>
+                    <button type="button" class="btn btn-success mt-2" onclick="captureImage()">📸 撮影</button>
+                </div>
+
+                <img id="preview_employment_contract" src="" alt="プレビュー"
+                    style="display:none; max-width: 100%; margin-top: 10px;">
             </div>
+
+            <!-- 身分証明書（通常アップロード + カメラ撮影） -->
             <div class="mb-3">
-                <label for="id_proof" class="form-label">あなたの身分証明書</label>
-                <input type="file" class="form-control file-input" id="id_proof" name="id_proof" required>
+                <label for="id_proof" class="form-label">あなたの身分証明書（撮影可）</label>
+                <input type="file" class="form-control file-input" id="id_proof" name="id_proof" accept="image/*"
+                    required onchange="previewImage(event, 'preview_id_proof')">
+
+                <button type="button" class="btn btn-secondary mt-2" onclick="startCamera('id_proof')">📷
+                    カメラを起動</button>
+
+                <img id="preview_id_proof" src="" alt="プレビュー"
+                    style="display:none; max-width: 100%; margin-top: 10px;">
             </div>
+
+            <script>
+                let videoStream = null;
+                let currentTarget = '';
+
+                // 📷 カメラを起動する関数
+                function startCamera(target) {
+                    currentTarget = target;
+                    const cameraView = document.getElementById("cameraView");
+                    const cameraContainer = document.getElementById("cameraContainer");
+
+                    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                        navigator.mediaDevices.getUserMedia({
+                                video: {
+                                    facingMode: "environment"
+                                }
+                            })
+                            .then(function(stream) {
+                                videoStream = stream;
+                                cameraView.srcObject = stream;
+                                cameraContainer.style.display = "block";
+                            })
+                            .catch(function(error) {
+                                alert("カメラの起動に失敗しました: " + error);
+                            });
+                    } else {
+                        alert("このデバイスではカメラがサポートされていません");
+                    }
+                }
+
+                // 📸 撮影して画像をプレビュー＆フォームにセット
+                function captureImage() {
+                    const cameraView = document.getElementById("cameraView");
+                    const canvas = document.createElement('canvas');
+                    const preview = document.getElementById(`preview_${currentTarget}`);
+                    const fileInput = document.getElementById(currentTarget);
+
+                    canvas.width = cameraView.videoWidth;
+                    canvas.height = cameraView.videoHeight;
+                    canvas.getContext('2d').drawImage(cameraView, 0, 0, canvas.width, canvas.height);
+
+                    // 画像プレビュー表示
+                    preview.src = canvas.toDataURL('image/png');
+                    preview.style.display = "block";
+
+                    // データをBlobに変換してファイルとしてフォームにセット
+                    canvas.toBlob(function(blob) {
+                        const file = new File([blob], `${currentTarget}.png`, {
+                            type: "image/png"
+                        });
+                        const dataTransfer = new DataTransfer();
+                        dataTransfer.items.add(file);
+                        fileInput.files = dataTransfer.files;
+                    }, 'image/png');
+
+                    // カメラ停止
+                    if (videoStream) {
+                        videoStream.getTracks().forEach(track => track.stop());
+                    }
+                    document.getElementById("cameraContainer").style.display = "none";
+                }
+            </script>
+
 
             <button type="submit" class="btn btn-primary">確認</button>
         </form>
