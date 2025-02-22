@@ -59,14 +59,22 @@
 
                 /* カメラプレビュー用 */
                 .camera-container {
-                    display: none;
+                    display: flex;
+                    flex-direction: column;
+                    /* ボタンとカメラの配置を統一 */
+                    align-items: flex-start;
                     margin-top: 10px;
-                    text-align: center;
+                }
+
+                img {
+                    display: block;
+                    margin-top: 10px;
                 }
 
                 video {
                     width: 100%;
-                    max-width: 400px;
+                    max-width: 300px;
+                    /* 撮影画面を適切なサイズに */
                 }
             </style>
 
@@ -142,15 +150,18 @@
                 <button type="button" class="btn btn-secondary mt-2" onclick="startCamera('employment_contract')">📷
                     カメラを起動</button>
 
-                <div class="camera-container" id="cameraContainer">
-                    <video id="cameraView" autoplay playsinline></video>
-                    <button type="button" class="btn btn-success mt-2" onclick="captureImage()">📸 撮影</button>
+                <div class="camera-container" id="cameraContainer_employment_contract" style="display: none;">
+                    <video id="cameraView_employment_contract" autoplay playsinline></video>
                 </div>
 
                 <img id="preview_employment_contract" src="" alt="プレビュー"
                     style="display:none; max-width: 100%; margin-top: 10px;">
-            </div>
 
+                <button type="button" class="btn btn-success mt-2 capture-btn" id="capture_employment_contract"
+                    style="display:none;" onclick="captureImage('employment_contract')">📸 撮影</button>
+                <button type="button" class="btn btn-danger mt-2 reset-btn" id="reset_employment_contract"
+                    style="display:none;" onclick="resetImage('employment_contract')">🔄 やり直す</button>
+            </div>
             <!-- 身分証明書（通常アップロード + カメラ撮影） -->
             <div class="mb-3">
                 <label for="id_proof" class="form-label">あなたの身分証明書（撮影可）</label>
@@ -160,19 +171,33 @@
                 <button type="button" class="btn btn-secondary mt-2" onclick="startCamera('id_proof')">📷
                     カメラを起動</button>
 
+                <div class="camera-container" id="cameraContainer_id_proof" style="display: none;">
+                    <video id="cameraView_id_proof" autoplay playsinline></video>
+                </div>
+
                 <img id="preview_id_proof" src="" alt="プレビュー"
                     style="display:none; max-width: 100%; margin-top: 10px;">
-            </div>
 
+                <button type="button" class="btn btn-success mt-2 capture-btn" id="capture_id_proof"
+                    style="display:none;" onclick="captureImage('id_proof')">📸 撮影</button>
+                <button type="button" class="btn btn-danger mt-2 reset-btn" id="reset_id_proof" style="display:none;"
+                    onclick="resetImage('id_proof')">🔄 やり直す</button>
+            </div>
             <script>
                 let videoStream = null;
                 let currentTarget = '';
 
-                // 📷 カメラを起動する関数
+                // 📷 カメラを起動する関数（撮影欄ごとに個別に表示）
                 function startCamera(target) {
-                    currentTarget = target;
-                    const cameraView = document.getElementById("cameraView");
-                    const cameraContainer = document.getElementById("cameraContainer");
+                    // すでにカメラが起動している場合は停止
+                    if (videoStream) {
+                        stopCamera();
+                    }
+
+                    currentTarget = target; // 現在のターゲットをセット
+                    const cameraView = document.getElementById(`cameraView_${target}`);
+                    const cameraContainer = document.getElementById(`cameraContainer_${target}`);
+                    const captureButton = document.getElementById(`capture_${target}`);
 
                     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                         navigator.mediaDevices.getUserMedia({
@@ -183,7 +208,8 @@
                             .then(function(stream) {
                                 videoStream = stream;
                                 cameraView.srcObject = stream;
-                                cameraContainer.style.display = "block";
+                                cameraContainer.style.display = "flex";
+                                captureButton.style.display = "block"; // 📸 撮影ボタンを表示
                             })
                             .catch(function(error) {
                                 alert("カメラの起動に失敗しました: " + error);
@@ -194,11 +220,13 @@
                 }
 
                 // 📸 撮影して画像をプレビュー＆フォームにセット
-                function captureImage() {
-                    const cameraView = document.getElementById("cameraView");
+                function captureImage(target) {
+                    const cameraView = document.getElementById(`cameraView_${target}`);
                     const canvas = document.createElement('canvas');
-                    const preview = document.getElementById(`preview_${currentTarget}`);
-                    const fileInput = document.getElementById(currentTarget);
+                    const preview = document.getElementById(`preview_${target}`);
+                    const fileInput = document.getElementById(target);
+                    const resetButton = document.getElementById(`reset_${target}`);
+                    const captureButton = document.getElementById(`capture_${target}`);
 
                     canvas.width = cameraView.videoWidth;
                     canvas.height = cameraView.videoHeight;
@@ -210,7 +238,7 @@
 
                     // データをBlobに変換してファイルとしてフォームにセット
                     canvas.toBlob(function(blob) {
-                        const file = new File([blob], `${currentTarget}.png`, {
+                        const file = new File([blob], `${target}.png`, {
                             type: "image/png"
                         });
                         const dataTransfer = new DataTransfer();
@@ -218,15 +246,50 @@
                         fileInput.files = dataTransfer.files;
                     }, 'image/png');
 
+                    // 撮影後に「やり直す」ボタンを表示
+                    resetButton.style.display = "block";
+
+                    // 撮影ボタンを非表示にする（撮影済みなので不要）
+                    captureButton.style.display = "none";
+
                     // カメラ停止
+                    stopCamera();
+                }
+
+                // 🔄 撮影画像をやり直す
+                function resetImage(target) {
+                    const preview = document.getElementById(`preview_${target}`);
+                    const fileInput = document.getElementById(target);
+                    const resetButton = document.getElementById(`reset_${target}`);
+                    const captureButton = document.getElementById(`capture_${target}`);
+
+                    // 画像プレビューをクリア
+                    preview.src = "";
+                    preview.style.display = "none";
+
+                    // ファイル入力をリセット
+                    fileInput.value = "";
+
+                    // 「やり直す」ボタンを非表示
+                    resetButton.style.display = "none";
+
+                    // 撮影ボタンを非表示（カメラを起動するまで表示しない）
+                    captureButton.style.display = "none";
+                }
+
+                // 🛑 カメラを停止する関数
+                function stopCamera() {
                     if (videoStream) {
                         videoStream.getTracks().forEach(track => track.stop());
+                        videoStream = null;
                     }
-                    document.getElementById("cameraContainer").style.display = "none";
+
+                    // すべてのカメラコンテナを非表示にする
+                    document.querySelectorAll('.camera-container').forEach(container => {
+                        container.style.display = "none";
+                    });
                 }
             </script>
-
-
             <button type="submit" class="btn btn-primary">確認</button>
         </form>
     </div>
