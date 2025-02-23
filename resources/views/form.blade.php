@@ -20,6 +20,14 @@
                 body {
                     background-color: #e6ffe6;
                     /* 薄い緑色 */
+                    display: flex;
+                    justify-content: center;
+                    /* 水平方向の中央揃え */
+                    align-items: center;
+                    /* 垂直方向の中央揃え */
+                    min-height: 100vh;
+                    /* 画面の高さいっぱいに表示 */
+                    margin: 0;
                 }
 
                 .form-control {
