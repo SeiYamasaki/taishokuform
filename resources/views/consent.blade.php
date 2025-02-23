@@ -1,19 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container text-white bg-dark p-4">
-        <h2 class="text-warning">同意Form</h2>
-        <p>個人情報の取扱い及び転職支援サービス利用に関する同意書</p>
+    <div class="container text-white bg-dark p-5" style="max-width: 1100px; border-radius: 10px;">
 
-        <p>以下の内容をご確認いただき、ご同意の上で送信してください。</p>
+
+        <h2 class="text-warning text-center">個人情報の取扱い及び転職支援サービス利用に関する同意書</h2>
+        <p class="text-center">同意フォーム</p>
+
+        <p>以下の内容をご確認いただき、ご同意の上で確認画面へ進んでください。</p>
 
         <h4>1. 収集する個人情報について</h4>
         <p>本フォームを通じて、以下の個人情報を収集いたします。</p>
         <ul>
-            <li>氏名</li>
+            <li>氏名（フリガナ含む）</li>
+            <li>性別</li>
+            <li>生年月日および満年齢</li>
+            <li>LINE登録名</li>
             <li>住所（郵便番号、都道府県、市区町村）</li>
+            <li>住居形態（実家・持家・社宅・社員寮・その他）</li>
             <li>連絡先（メールアドレス、電話番号）</li>
             <li>勤務先情報（会社名、所在地、連絡先）</li>
+            <li>職種および勤続年数</li>
+            <li>現在の勤務状況（公休・勤務中・この後勤務・バックレ状態）</li>
+            <li>希望退職日、最終出勤日</li>
+            <li>有給取得希望</li>
             <li>退職連絡が必要な担当者</li>
             <li>雇用契約書または労働条件通知書（添付ファイル）</li>
             <li>身分証明書（運転免許証、健康保険証等）（添付ファイル）</li>
@@ -38,21 +48,28 @@
         <h4>4. 個人情報の管理について</h4>
         <p>当社は、お預かりした個人情報の適切な管理を行い、不正アクセス、紛失、漏洩が生じないよう、最大限の安全対策を講じます。</p>
 
-        <h4>5. 同意の確認</h4>
-        <p>私は、上記の内容を理解し、以下の事項に同意します。</p>
+        <h4>5. 合意及び同意の確認</h4>
+        <p>私は、上記の内容を理解し、以下の事項に合意及び同意します。</p>
         <ul>
             <li>本フォームに入力した個人情報が、転職支援サービスの提供および退職連絡の目的で利用されること</li>
             <li>求人紹介および転職支援の目的で、必要に応じて提携企業や人材紹介会社へ個人情報が提供されること</li>
             <li>当社が定める個人情報の取扱いに関するポリシーに従い、情報が管理されること</li>
+            <li>退職代行モーアカン®が貴殿から本サービス受任後､紛争性を有した場合は介入しないこと</li>
+            <li>当サービスの判定フォーム又は情報フォームにおいて､貴殿の提供した内容に虚偽や相違が合った場合において基因する損害の責を追わないこと</li>
+            <li>残業代及び退職金並びに未払給与の請求は行わないこと</li>
         </ul>
 
-        <form action="{{ route('consent.submit') }}" method="POST">
+        <form action="{{ route('consent.submit') }}" method="POST" class="mt-4">
             @csrf
             <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="consent" name="consent" value="1" required>
-                <label class="form-check-label" for="consent">承諾・同意して確認画面へ</label>
+                <label class="form-check-label" for="consent">
+                    <strong>承諾・同意して確認画面へ</strong>
+                </label>
             </div>
-            <button type="submit" class="btn btn-success mt-3">確認画面へ</button>
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-success">確認画面へ</button>
+            </div>
         </form>
     </div>
 @endsection
