@@ -91,17 +91,17 @@
                 }
             </style>
 
-            <h4 class="section-personal">あなたの情報</h4>
+            <h4 class="section-personal">あなたの情報 ※必須</h4>
             <div class="mb-3">
-                <label for="name" class="form-label">あなたの名前</label>
+                <label for="name" class="form-label">あなたの名前 ※必須</label>
                 <input type="text" class="form-control" id="name" name="name" required>
             </div>
             <div class="mb-3">
-                <label for="name_furigana" class="form-label">あなたのお名前のフリガナ</label>
+                <label for="name_furigana" class="form-label">あなたのお名前のフリガナ ※必須</label>
                 <input type="text" class="form-control" id="name_furigana" name="name_furigana" required>
             </div>
             <div class="mb-3">
-                <label class="form-label">あなたの性別</label><br>
+                <label class="form-label">あなたの性別 ※必須</label><br>
                 <input type="radio" id="male" name="gender" value="男性" required>
                 <label for="male">男性</label>
                 <input type="radio" id="female" name="gender" value="女性">
@@ -109,13 +109,13 @@
             </div>
             <!-- 生年月日 -->
             <div class="mb-3">
-                <label for="birth_date" class="form-label">あなたの生年月日</label>
+                <label for="birth_date" class="form-label">あなたの生年月日 ※必須</label>
                 <input type="date" class="form-control small-input" id="birth_date" name="birth_date" required
                     onchange="calculateAge()">
             </div>
             <!-- 満年齢 -->
             <div class="mb-3">
-                <label for="age" class="form-label">あなたの満年齢</label>
+                <label for="age" class="form-label">あなたの満年齢 ※必須</label>
                 <input type="text" class="form-control small-input" id="age" name="age" readonly>
             </div>
             <script>
@@ -142,15 +142,15 @@
                 });
             </script>
             <div class="mb-3">
-                <label for="line_name" class="form-label">あなたのLINE登録名</label>
+                <label for="line_name" class="form-label">あなたのLINE登録名 ※LINEに登録されている表示名 ※必須</label>
                 <input type="text" class="form-control" id="line_name" name="line_name" required>
             </div>
             <div class="mb-3">
-                <label for="postal_code" class="form-label">あなたの住所の郵便番号 例:◯◯◯ー◯◯◯◯</label>
+                <label for="postal_code" class="form-label">あなたの住所の郵便番号 ※必須 例:◯◯◯ー◯◯◯◯</label>
                 <input type="text" class="form-control small-input" id="postal_code" name="postal_code" required>
             </div>
             <div class="mb-3">
-                <label for="prefecture" class="form-label">あなたの住所の都道府県</label>
+                <label for="prefecture" class="form-label">あなたの住所の都道府県 ※必須</label>
                 <select class="form-control small-input" id="prefecture" name="prefecture" required>
                     <option value="">選択してください</option>
                     @foreach (['北海道', '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県', '茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県', '新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県', '岐阜県', '静岡県', '愛知県', '三重県', '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県', '鳥取県', '島根県', '岡山県', '広島県', '山口県', '徳島県', '香川県', '愛媛県', '高知県', '福岡県', '佐賀県', '長崎県', '熊本県', '大分県', '宮崎県', '鹿児島県', '沖縄県'] as $prefecture)
@@ -159,12 +159,12 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label for="address" class="form-label">あなたの住所</label>
+                <label for="address" class="form-label">あなたの住所(都道府県を除く住所) ※必須</label>
                 <input type="text" class="form-control" id="address" name="address" required>
             </div>
             <!-- 住居 -->
             <div class="mb-3">
-                <label for="residence" class="form-label">あなたの住居の形態</label>
+                <label for="residence" class="form-label">あなたの住居の形態 ※必須</label>
                 <select class="form-control" id="residence" name="residence" required>
                     <option value="">選択してください</option>
                     <option value="実家">実家</option>
@@ -175,16 +175,16 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label for="contact_email" class="form-label">あなたの連絡先メールアドレス</label>
+                <label for="contact_email" class="form-label">あなたの連絡先メールアドレス ※退職代行モーアカン®から連絡を希望するアドレス ※必須</label>
                 <input type="email" class="form-control" id="contact_email" name="contact_email" required>
             </div>
             <div class="mb-3">
-                <label for="contact_phone" class="form-label">あなたの連絡先電話番号 例:090-◯◯◯◯-◯◯◯◯</label>
+                <label for="contact_phone" class="form-label">あなたの連絡先電話番号 ※必須 例:090-◯◯◯◯-◯◯◯◯</label>
                 <input type="tel" class="form-control small-input" id="contact_phone" name="contact_phone" required>
             </div>
             <!-- 現在の状況 -->
             <div class="mb-3">
-                <label for="current_status" class="form-label">現在の状況</label>
+                <label for="current_status" class="form-label">現在の状況 ※必須</label>
                 <select class="form-control" id="current_status" name="current_status" required>
                     <option value="">選択してください</option>
                     <option value="公休">公休</option>
@@ -195,19 +195,19 @@
             </div>
             <!-- 希望退職日 -->
             <div class="mb-3">
-                <label for="desired_resignation_date" class="form-label">希望退職日</label>
+                <label for="desired_resignation_date" class="form-label">希望退職日 ※退職届書に記載する退職日になります｡ ※必須</label>
                 <input type="date" class="form-control small-input" id="desired_resignation_date"
                     name="desired_resignation_date" required>
             </div>
             <!-- 最終出勤日 -->
             <div class="mb-3">
-                <label for="final_work_date" class="form-label">最終出勤日</label>
+                <label for="final_work_date" class="form-label">最終出勤日 ※必須</label>
                 <input type="date" class="form-control small-input" id="final_work_date" name="final_work_date"
                     required>
             </div>
             <!-- 有給取得希望 -->
             <div class="mb-3">
-                <label for="paid_leave_preference" class="form-label">有給取得希望</label>
+                <label for="paid_leave_preference" class="form-label">有給取得希望 ※有給取得できない場合があります｡ ※必須</label>
                 <select class="form-control" id="paid_leave_preference" name="paid_leave_preference" required>
                     <option value="">選択してください</option>
                     <option value="希望する">希望する</option>
@@ -218,15 +218,15 @@
 
             <h4 class="section-work">あなたの勤務先情報</h4>
             <div class="mb-3">
-                <label for="company_name" class="form-label">あなたの勤務先法人名</label>
+                <label for="company_name" class="form-label">あなたの勤務先法人名 正式な法人名を入力してください｡ ※必須 例 : 株式会社◯◯◯◯</label>
                 <input type="text" class="form-control" id="company_name" name="company_name">
             </div>
             <div class="mb-3">
-                <label for="work_postal_code" class="form-label">あなたの勤務先の住所の郵便番号 例:◯◯◯ー◯◯◯◯</label>
+                <label for="work_postal_code" class="form-label">あなたの勤務先の住所の郵便番号 ※必須 例:◯◯◯ー◯◯◯◯</label>
                 <input type="text" class="form-control small-input" id="work_postal_code" name="work_postal_code">
             </div>
             <div class="mb-3">
-                <label for="work_prefecture" class="form-label">あなたの勤務先の住所の都道府県</label>
+                <label for="work_prefecture" class="form-label">あなたの勤務先の住所の都道府県 ※必須</label>
                 <select class="form-control small-input" id="work_prefecture" name="work_prefecture">
                     <option value="">選択してください</option>
                     @foreach (['北海道', '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県', '茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県', '新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県', '岐阜県', '静岡県', '愛知県', '三重県', '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県', '鳥取県', '島根県', '岡山県', '広島県', '山口県', '徳島県', '香川県', '愛媛県', '高知県', '福岡県', '佐賀県', '長崎県', '熊本県', '大分県', '宮崎県', '鹿児島県', '沖縄県'] as $prefecture)
@@ -235,25 +235,25 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label for="work_address" class="form-label">あなたの勤務先の住所</label>
+                <label for="work_address" class="form-label">あなたの勤務先の住所(都道府県を除く) ※必須</label>
                 <input type="text" class="form-control" id="work_address" name="work_address">
             </div>
             <div class="mb-3">
-                <label for="work_email" class="form-label">あなたの勤務先のメールアドレス ※退職を伝える方(あなたのアドレスではない)のアドレスを正確に記入ください！</label>
+                <label for="work_email" class="form-label">あなたの勤務先のメールアドレス ※退職を伝える方(あなたのアドレスではない)のアドレスを正確に記入ください！ ※必須</label>
                 <input type="text" class="form-control" id="work_email" name="work_email">
             </div>
             <div class="mb-3">
-                <label for="work_contact_phone" class="form-label">あなたの勤務先の電話番号 (代表電話)</label>
+                <label for="work_contact_phone" class="form-label">あなたの勤務先の電話番号 (代表電話) ※必須</label>
                 <input type="text" class="form-control" id="work_contact_phone" name="work_contact_phone">
             </div>
             <div class="mb-3">
-                <label for="work_superior_phone" class="form-label">あなたの勤務先の上司の携帯番号 (携帯電話)</label>
+                <label for="work_superior_phone" class="form-label">あなたの勤務先の上司の携帯番号 (携帯電話) ※必須</label>
                 <input type="text" class="form-control" id="work_superior_phone" name="work_superior_phone">
             </div>
 
             <!-- 雇用形態 -->
             <div class="mb-3">
-                <label for="employment_type" class="form-label">あなたの雇用形態</label>
+                <label for="employment_type" class="form-label">あなたの雇用形態 ※必須</label>
                 <select class="form-control" id="employment_type" name="employment_type" required>
                     <option value="">選択してください</option>
                     <option value="正社員">正社員</option>
@@ -267,7 +267,7 @@
             </div>
             <!-- 職種 -->
             <div class="mb-3">
-                <label for="job_type" class="form-label">あなたの職種</label>
+                <label for="job_type" class="form-label">あなたの職種 ※必須</label>
                 <select class="form-control" id="job_type" name="job_type" required>
                     <option value="">選択してください</option>
                     @foreach (['飲食業', 'サービス業', '販売業', '建築業', '運送業', '不動産業', '製造業', '保険', '金融', '営業', '教育関連', '美容関連', '医療関連', '介護関連', '事務関連', 'IT関連'] as $job)
@@ -277,7 +277,7 @@
             </div>
             <!-- 勤続年数 -->
             <div class="mb-3">
-                <label for="years_of_service" class="form-label">勤続年数</label>
+                <label for="years_of_service" class="form-label">勤続年数 ※必須</label>
                 <select class="form-control" id="years_of_service" name="years_of_service" required>
                     <option value="">選択してください</option>
                     <option value="6ヶ月未満">6ヶ月未満</option>
@@ -290,29 +290,29 @@
             </div>
             <h4 class="section-resignation">退職関連</h4>
             <div class="mb-3">
-                <label for="bank_name" class="form-label">給与振込口座銀行名 例:◯◯◯銀行</label>
+                <label for="bank_name" class="form-label">給与振込口座銀行名と支店名 例:◯◯◯◯銀行◯◯支店 ※必須</label>
                 <input type="text" class="form-control" id="bank_name" name="bank_name">
             </div>
 
             <div class="mb-3">
-                <label for="account_type" class="form-label">給与振込口座の種類 例:普通口座</label>
+                <label for="account_type" class="form-label">給与振込口座の種類 例:普通口座 ※必須</label>
                 <input type="text" class="form-control" id="account_type" name="account_type">
             </div>
 
             <div class="mb-3">
-                <label for="account_number" class="form-label">給与振込口座番号 例:12345678</label>
+                <label for="account_number" class="form-label">給与振込口座番号 例:12345678 ※必須</label>
                 <input type="text" class="form-control" id="account_number" name="account_number">
             </div>
 
             <div class="mb-3">
-                <label for="resignation_contact" class="form-label">退職を伝えるべき勤務先の人の名前</label>
+                <label for="resignation_contact" class="form-label">退職を伝えるべき勤務先の人の名前 (上司のフルネーム又は代表取締役のフルネーム)※必須</label>
                 <input type="text" class="form-control" id="resignation_contact" name="resignation_contact">
             </div>
 
             <h4 class="section-file">ファイルアップロード</h4>
             <!-- 雇用契約書（通常アップロード + カメラ撮影） -->
             <div class="mb-3">
-                <label for="employment_contract" class="form-label">あなたの雇用契約書または労働条件通知書（撮影可）</label>
+                <label for="employment_contract" class="form-label">あなたの雇用契約書または労働条件通知書（撮影可）※必須</label>
                 <input type="file" class="form-control file-input" id="employment_contract"
                     name="employment_contract" accept=".pdf,.doc,.docx,image/*" required
                     onchange="previewImage(event, 'preview_employment_contract')">
@@ -334,7 +334,7 @@
             </div>
             <!-- 身分証明書（通常アップロード + カメラ撮影） -->
             <div class="mb-3">
-                <label for="id_proof" class="form-label">あなたの身分証明書（撮影可）</label>
+                <label for="id_proof" class="form-label">あなたの身分証明書（撮影可）※必須</label>
                 <input type="file" class="form-control file-input" id="id_proof" name="id_proof" accept="image/*"
                     required onchange="previewImage(event, 'preview_id_proof')">
 
@@ -461,7 +461,7 @@
 
                 }
             </script>
-            <button type="submit" class="btn btn-primary">確認</button>
+            <button type="submit" class="btn btn-primary">次に進む</button>
         </form>
     </div>
 @endsection
