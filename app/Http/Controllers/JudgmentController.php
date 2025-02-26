@@ -22,7 +22,10 @@ class JudgmentController extends Controller
             }
         }
 
-        // すべてNoならフォームページへ遷移
+        // セッションにデータを保存
+        session(['judgment' => $responses]);
+
+        // すべてNoなら情報入力フォームページへ遷移
         return redirect()->route('form.show');
     }
 }
