@@ -35,7 +35,7 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label">医師や弁護士などの資格保持者の勤務務務者ですか？</label>
+                <label class="form-label">医師や弁護士などの資格保持者の勤務者ですか？</label>
                 <select class="form-control" name="licensed_professional">
                     <option value="yes" selected>Yes</option>
                     <option value="no">No</option>
@@ -69,14 +69,6 @@
             <div class="mb-3">
                 <label class="form-label">残業代や退職金でトラブルがありますか？</label>
                 <select class="form-control" name="trouble">
-                    <option value="yes" selected>Yes</option>
-                    <option value="no">No</option>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">転職先の紹介を希望しますか？（同意）</label>
-                <select class="form-control" name="job_recommendation">
                     <option value="yes" selected>Yes</option>
                     <option value="no">No</option>
                 </select>
