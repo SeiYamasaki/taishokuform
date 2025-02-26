@@ -9,7 +9,6 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -21,6 +20,34 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'name_furigana',
+        'gender',
+        'birth_date',
+        'age',
+        'line_name',
+        'postal_code',
+        'prefecture',
+        'address',
+        'residence',
+        'contact_phone',
+        'company_name',
+        'work_postal_code',
+        'work_prefecture',
+        'work_address',
+        'employment_type',
+        'job_type',
+        'years_of_service',
+        'current_status',
+        'desired_resignation_date',
+        'final_work_date',
+        'paid_leave_preference',
+        'resignation_contact',
+        'bank_name',
+        'account_type',
+        'account_number',
+        'account_holder',
+        'employment_contract_path',
+        'id_proof_path',
     ];
 
     /**
@@ -34,7 +61,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast.
      *
      * @return array<string, string>
      */
@@ -43,6 +70,9 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'birth_date' => 'date',
+            'desired_resignation_date' => 'date',
+            'final_work_date' => 'date',
         ];
     }
 }

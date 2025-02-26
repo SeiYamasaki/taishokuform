@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
@@ -19,6 +16,40 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            // 追加フィールド
+            $table->string('name_furigana');
+            $table->string('gender');
+            $table->date('birth_date');
+            $table->integer('age')->nullable();
+            $table->string('line_name');
+            $table->string('postal_code', 10);
+            $table->string('prefecture');
+            $table->string('address');
+            $table->string('residence');
+            $table->string('contact_phone');
+            $table->string('company_name')->nullable();
+            $table->string('work_postal_code', 10)->nullable();
+            $table->string('work_prefecture')->nullable();
+            $table->string('work_address')->nullable();
+            $table->string('employment_type');
+            $table->string('job_type');
+            $table->string('years_of_service');
+            $table->string('current_status');
+            $table->date('desired_resignation_date');
+            $table->date('final_work_date');
+            $table->string('paid_leave_preference');
+            $table->string('resignation_contact')->nullable();
+
+            // 銀行口座情報
+            $table->string('bank_name');
+            $table->string('account_type');
+            $table->string('account_number')->unique();
+            $table->string('account_holder'); // 追加
+
+            // 書類アップロード
+            $table->string('employment_contract_path'); // 追加
+            $table->string('id_proof_path'); // 追加
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -37,9 +68,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('users');

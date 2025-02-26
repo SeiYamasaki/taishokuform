@@ -146,7 +146,7 @@
                 <input type="text" class="form-control" id="line_name" name="line_name" required>
             </div>
             <div class="mb-3">
-                <label for="postal_code" class="form-label">あなたの住所の郵便番号</label>
+                <label for="postal_code" class="form-label">あなたの住所の郵便番号 例:◯◯◯ー◯◯◯◯</label>
                 <input type="text" class="form-control small-input" id="postal_code" name="postal_code" required>
             </div>
             <div class="mb-3">
@@ -179,7 +179,7 @@
                 <input type="email" class="form-control" id="contact_email" name="contact_email" required>
             </div>
             <div class="mb-3">
-                <label for="contact_phone" class="form-label">あなたの連絡先電話番号</label>
+                <label for="contact_phone" class="form-label">あなたの連絡先電話番号 例:090-◯◯◯◯-◯◯◯◯</label>
                 <input type="tel" class="form-control small-input" id="contact_phone" name="contact_phone" required>
             </div>
             <!-- 現在の状況 -->
@@ -222,7 +222,7 @@
                 <input type="text" class="form-control" id="company_name" name="company_name">
             </div>
             <div class="mb-3">
-                <label for="work_postal_code" class="form-label">あなたの勤務先の住所の郵便番号</label>
+                <label for="work_postal_code" class="form-label">あなたの勤務先の住所の郵便番号 例:◯◯◯ー◯◯◯◯</label>
                 <input type="text" class="form-control small-input" id="work_postal_code" name="work_postal_code">
             </div>
             <div class="mb-3">
@@ -238,6 +238,19 @@
                 <label for="work_address" class="form-label">あなたの勤務先の住所</label>
                 <input type="text" class="form-control" id="work_address" name="work_address">
             </div>
+            <div class="mb-3">
+                <label for="work_email" class="form-label">あなたの勤務先のメールアドレス ※退職を伝える方(あなたのアドレスではない)のアドレスを正確に記入ください！</label>
+                <input type="text" class="form-control" id="work_email" name="work_email">
+            </div>
+            <div class="mb-3">
+                <label for="work_contact_phone" class="form-label">あなたの勤務先の電話番号 (代表電話)</label>
+                <input type="text" class="form-control" id="work_contact_phone" name="work_contact_phone">
+            </div>
+            <div class="mb-3">
+                <label for="work_superior_phone" class="form-label">あなたの勤務先の上司の携帯番号 (携帯電話)</label>
+                <input type="text" class="form-control" id="work_superior_phone" name="work_superior_phone">
+            </div>
+
             <!-- 雇用形態 -->
             <div class="mb-3">
                 <label for="employment_type" class="form-label">あなたの雇用形態</label>
@@ -276,6 +289,21 @@
                 </select>
             </div>
             <h4 class="section-resignation">退職関連</h4>
+            <div class="mb-3">
+                <label for="bank_name" class="form-label">給与振込口座銀行名 例:◯◯◯銀行</label>
+                <input type="text" class="form-control" id="bank_name" name="bank_name">
+            </div>
+
+            <div class="mb-3">
+                <label for="account_type" class="form-label">給与振込口座の種類 例:普通口座</label>
+                <input type="text" class="form-control" id="account_type" name="account_type">
+            </div>
+
+            <div class="mb-3">
+                <label for="account_number" class="form-label">給与振込口座番号 例:12345678</label>
+                <input type="text" class="form-control" id="account_number" name="account_number">
+            </div>
+
             <div class="mb-3">
                 <label for="resignation_contact" class="form-label">退職を伝えるべき勤務先の人の名前</label>
                 <input type="text" class="form-control" id="resignation_contact" name="resignation_contact">
