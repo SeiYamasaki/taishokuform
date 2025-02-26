@@ -29,11 +29,15 @@ class User extends Authenticatable
         'prefecture',
         'address',
         'residence',
+        'contact_email',
         'contact_phone',
         'company_name',
         'work_postal_code',
         'work_prefecture',
         'work_address',
+        'work_email',
+        'work_contact_phone',
+        'work_superior_phone',
         'employment_type',
         'job_type',
         'years_of_service',
@@ -46,8 +50,8 @@ class User extends Authenticatable
         'account_type',
         'account_number',
         'account_holder',
-        'employment_contract_path',
-        'id_proof_path',
+        'employment_contract',
+        'id_proof',
     ];
 
     /**
@@ -58,6 +62,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'account_number', // セキュリティ対策として非表示
     ];
 
     /**
@@ -73,6 +78,7 @@ class User extends Authenticatable
             'birth_date' => 'date',
             'desired_resignation_date' => 'date',
             'final_work_date' => 'date',
+            'age' => 'integer',
         ];
     }
 }
